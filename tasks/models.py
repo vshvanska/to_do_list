@@ -15,11 +15,11 @@ class Task(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     deadline = models.DateTimeField(null=True, blank=True)
-    is_completed = models.BooleanField(default=True)
+    is_completed = models.BooleanField(default=False)
     tags = models.ManyToManyField(Tag, related_name="tasks")
 
     class Meta:
-        ordering = ("-is_completed", "content")
+        ordering = ("is_completed", "-created_at", "content")
 
     def __str__(self):
         return self.content
