@@ -14,7 +14,10 @@ class TaskCreateForm(forms.ModelForm):
         }
 
     def clean_deadline(self):
-        return validate_deadline(self.cleaned_data["deadline"])
+        deadline = self.cleaned_data["deadline"]
+        if deadline:
+            validate_deadline(deadline)
+        return deadline
 
 
 class TaskUpdateForm(forms.ModelForm):
@@ -26,7 +29,10 @@ class TaskUpdateForm(forms.ModelForm):
         }
 
     def clean_deadline(self):
-        return validate_deadline(self.cleaned_data["deadline"])
+        deadline = self.cleaned_data["deadline"]
+        if deadline:
+            validate_deadline(deadline)
+        return deadline
 
 
 def validate_deadline(deadline):

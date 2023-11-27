@@ -4,35 +4,49 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Tag',
+            name="Tag",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, unique=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255, unique=True)),
             ],
             options={
-                'ordering': ('name',),
+                "ordering": ("name",),
             },
         ),
         migrations.CreateModel(
-            name='Task',
+            name="Task",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('content', models.TextField()),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('deadline', models.DateTimeField(blank=True, null=True)),
-                ('is_completed', models.BooleanField(default=True)),
-                ('tags', models.ManyToManyField(related_name='tasks', to='tasks.tag')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("content", models.TextField()),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("deadline", models.DateTimeField(blank=True, null=True)),
+                ("is_completed", models.BooleanField(default=True)),
+                ("tags", models.ManyToManyField(related_name="tasks", to="tasks.tag")),
             ],
             options={
-                'ordering': ('-is_completed', 'content'),
+                "ordering": ("-is_completed", "content"),
             },
         ),
     ]

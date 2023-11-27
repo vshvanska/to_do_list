@@ -1,5 +1,5 @@
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -55,4 +55,4 @@ def task_status_update(request: HttpRequest, pk=int) -> HttpResponse:
     task = Task.objects.get(id=pk)
     task.is_completed = not task.is_completed
     task.save()
-    return reverse_lazy("tasks:task-list")
+    return redirect("tasks:task-list")
