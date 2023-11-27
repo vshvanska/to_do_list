@@ -1,3 +1,4 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -48,3 +49,10 @@ class TaskUpdateView(generic.UpdateView):
 class TaskDeleteView(generic.DeleteView):
     model = Task
     success_url = reverse_lazy("tasks:task-list")
+
+
+def task_status_update(request: HttpRequest, pk=int) -> HttpResponse:
+    task = Task.objects.get(id=pk)
+    task.is_completed = not task.is_completed
+    task.save()
+    return reverse_lazy("tasks:task-list")

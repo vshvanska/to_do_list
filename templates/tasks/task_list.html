@@ -11,12 +11,18 @@
         <div class="list-group-item">
   <div class="d-flex justify-content-between align-items-center">
     <div>
-      <h5 class="mb-0">{{ task.content }}
+      <h5 class="mb-0">{{ task.content }}</h5>
       {% if task.is_completed %}
-      <p class="btn btn-success">Done</p>
+      <p class="text-success">Done</p>
       {% else %}
-      <p class="btn btn-danger">Not Done</p>{% endif %}
-      </h5>
+      <p class="text-danger">Not Done</p>{% endif %}
+      {% if task.is_completed %}
+      <a href="{% url 'tasks:task-update-status' pk=task.id %}" class="btn btn-secondary link-to-page">
+        Undo</a>
+    {% else %}
+      <a href="{% url 'tasks:task-update-status' pk=task.id %}" class="btn btn-success link-to-page">
+      Complete</a>
+    {% endif %}<br>
       <small><i>{{ task.created_at }}</i></small>
     </div>
   </div>

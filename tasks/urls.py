@@ -17,7 +17,7 @@ Including another URLconf
 from django.urls import path
 
 from tasks.views import TaskListView, TagListView, TagCreateView, TagUpdateView, TagDeleteView, TaskCreateView, \
-    TaskDeleteView, TaskUpdateView
+    TaskDeleteView, TaskUpdateView, task_status_update
 
 urlpatterns = [
     path('', TaskListView.as_view(), name="task-list"),
@@ -31,7 +31,11 @@ urlpatterns = [
          name="task-delete"),
     path("tasks/<int:pk>/update/",
          TaskUpdateView.as_view(),
-         name="task-update")
+         name="task-update"),
+    path("tasks/<int:pk>/update-status/",
+         task_status_update,
+         name="task-update-status"),
+
 ]
 
 app_name = "tasks"
